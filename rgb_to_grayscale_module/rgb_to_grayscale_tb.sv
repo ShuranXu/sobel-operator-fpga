@@ -1,5 +1,6 @@
 `define clk_period  10
 `include "rgb_to_grayscale.v"
+`include "store_grayscale.v"
 
 module rgb_to_grayscale_tb ();
 
@@ -23,8 +24,23 @@ rgb_to_grayscale RGB_TO_GRAYSCALE(
 initial clk = 1'b1;
 always #(`clk_period / 2) clk = ~clk;
 
-`define read_file_name "lena.bmp" // 128x128 RGB image with pixel size being 24 bits
-localparam BMP_ARRAY_LEN = 50 * 1024; // 50KB
+//-------------------------------------------------------------
+localparam RESULT_ARRAY_LEN = 50 * 1024; // 50 KB
+reg [7:0] result[RESULT_ARRAY_LEN-1:0];
+
+store_grayscale STORE_GRAYSCALE(
+    clk,
+    rst,
+    done_o,
+    grayscale_o,
+    result
+);
+
+//-------------------------------------------------------------
+
+// 128x128 RGB image with pixel size being 24 bits
+`define read_file_name "input.bmp"
+localparam BMP_ARRAY_LEN = 50 * 1024; // 50 KB
 
 reg [7:0] bmp_data[BMP_ARRAY_LEN-1: 0];
 integer bmp_size, bmp_start_pos, bmp_width, bmp_height, bit_count;
@@ -80,6 +96,8 @@ task readBMP;
     end
 endtask
 
+
+//-------------------------------------------------------------
 `define write_file_name "result.bmp"
 task writeBMP();
     integer fileId, i;
@@ -99,37 +117,100 @@ task writeBMP();
     end
 endtask
 
+task writeBMPFromGrayscale();
+    integer fileId, i;
+    begin
+        fileId = $fopen(`write_file_name, "wb");
+        if(fileId == 0) begin
+            $display("Open BMP error\n");
+            $finish;
+        end
+
+        // write the BMP file header
+        for(i = 0; i < bmp_start_pos; i = i + 1) begin
+            $fwrite(fileId, "%c", bmp_data[i]);
+        end
+
+        // for(i = bmp_start_pos; i <bmp_size; i = i + 1) begin
+        //     $display("%h", result[i]);
+        // end
+
+        // write the BMP file content
+        for(i = bmp_start_pos; i < bmp_size; i = i + 1) begin
+            $fwrite(fileId, "%c", result[i - bmp_start_pos]);
+        end
+
+        $fclose(fileId);
+        $display("writeBMPFromGrayscale completed\n");
+    end
+endtask
+
+//-------------------------------------------------------------
+integer i;
 initial begin
-    // rst = 1'b1;
-    // done_i = 1'b0;
+    rst = 1'b1;
+    done_i = 1'b0;
 
-    // red_i = 8'b0;
-    // green_i = 8'b0;
-    // blue_i = 8'b0;
+    red_i = 8'b0;
+    green_i = 8'b0;
+    blue_i = 8'b0;
 
-    // #(`clk_period);
-    // rst = 1'b0;
-
-    // red_i = 8'b0000_0100;
-    // green_i = 8'b0000_0010;
-    // blue_i = 8'b0001_0000;
-
-    // done_i = 1'b1;
-
-    // #(`clk_period);
-    // assert(done_o == 1'b1);
-    // assert(grayscale_o == 8'd3);
-    // $display("grayscale_o = %d\n", grayscale_o);
-    // done_i = 1'b0;
-
-    // #(`clk_period);
-    // assert(done_o == 1'b0);
-    // assert(grayscale_o == 8'd0);
-    // $stop;
+    $dumpfile("waveforms/rgb_to_grayscale.vcd");
+    $dumpvars(0, rgb_to_grayscale_tb);
 
     readBMP;
-    writeBMP;
+
+    #(`clk_period);
+    rst = 1'b0;
+
+    for(i = bmp_start_pos; i < bmp_size; i = i + 3) begin
+        red_i = bmp_data[i+2];
+        green_i = bmp_data[i+1];
+        blue_i = bmp_data[i];
+
+        #(`clk_period);
+        done_i = 1'b1;
+    end
+
+    #(`clk_period);
+    done_i = 1'b0;
+
+    #(`clk_period);
+    writeBMPFromGrayscale;
+
+    #(`clk_period);
     $finish;
 end
 
+// initial begin
+//     rst = 1'b1;
+//     done_i = 1'b0;
+
+//     red_i = 8'b0;
+//     green_i = 8'b0;
+//     blue_i = 8'b0;
+
+//     #(`clk_period);
+//     rst = 1'b0;
+
+//     red_i = 8'b0000_0100;
+//     green_i = 8'b0000_0010;
+//     blue_i = 8'b0001_0000;
+
+//     done_i = 1'b1;
+
+//     #(`clk_period);
+//     assert(done_o == 1'b1);
+//     assert(grayscale_o == 8'd3);
+//     $display("grayscale_o = %d\n", grayscale_o);
+//     done_i = 1'b0;
+
+//     #(`clk_period);
+//     assert(done_o == 1'b0);
+//     assert(grayscale_o == 8'd0);
+//     readBMP;
+//     writeBMP;
+//     $finish;
+// end
 endmodule
+

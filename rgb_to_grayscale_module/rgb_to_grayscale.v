@@ -15,11 +15,15 @@ module rgb_to_grayscale(
     output reg done_o
 );
 
+reg [15:0] count;
+
     always @(posedge clk) begin
         if(rst) begin
+            count <= 12'b0;
             done_o <= 1'b0;
             grayscale_o <= 7'b0;
         end else begin
+            count <= count + 1;
             if(cam_done_i == 1'b1) begin
                 grayscale_o <= (red_i >> 2) + (red_i >> 5) + 
                                 (green_i >> 1) + (green_i >> 4) +
@@ -28,6 +32,7 @@ module rgb_to_grayscale(
             end else begin
                 grayscale_o <= 8'b0;
                 done_o <= 1'b0;
+                count <= 12'b0;
             end
         end
     end
