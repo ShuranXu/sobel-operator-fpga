@@ -17,7 +17,7 @@ module fifo_single_line_buffer (
     // This suggests that the buffer is designed to hold 640 pixel values 
     // (often corresponding to the width of an image in a row). 
     // parameter DEPTH = 640;
-    parameter DEPTH = 5; // for sim
+    parameter DEPTH = 6; // for sim
     reg [7:0] mem [DEPTH - 1: 0];
 
     reg [9:0] wr_pointer; // we need 10 bits because we need 10 bits to cover 640
