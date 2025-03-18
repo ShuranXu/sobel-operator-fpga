@@ -1,5 +1,4 @@
 `include "sobel_calc.v"
-
 `define clk_period  10
 
 module sobel_calc_tb();

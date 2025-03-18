@@ -1,0 +1,184 @@
+$date
+	Mon Mar 17 23:12:26 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module grayscale_to_rgb_tb $end
+$var wire 8 ! red_o [7:0] $end
+$var wire 8 " green_o [7:0] $end
+$var wire 1 # done_o $end
+$var wire 8 $ blue_o [7:0] $end
+$var reg 1 % clk $end
+$var reg 1 & done_i $end
+$var reg 8 ' grayscale_i [7:0] $end
+$var reg 1 ( rst $end
+$var integer 32 ) i [31:0] $end
+$scope module GRAYSCALE_TO_RGB $end
+$var wire 1 % clk $end
+$var wire 1 & done_i $end
+$var wire 8 * grayscale_i [7:0] $end
+$var wire 1 ( rst $end
+$var reg 8 + blue_o [7:0] $end
+$var reg 1 # done_o $end
+$var reg 8 , green_o [7:0] $end
+$var reg 8 - red_o [7:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 -
+b0 ,
+b0 +
+b0 *
+bx )
+1(
+b0 '
+0&
+1%
+b0 $
+0#
+b0 "
+b0 !
+$end
+#5
+0%
+#10
+1#
+b1 $
+b1 +
+b1 "
+b1 ,
+b1 !
+b1 -
+1%
+b1 '
+b1 *
+b0 )
+1&
+0(
+#15
+0%
+#20
+b10 $
+b10 +
+b10 "
+b10 ,
+b10 !
+b10 -
+1%
+b10 '
+b10 *
+b1 )
+#25
+0%
+#30
+b11 $
+b11 +
+b11 "
+b11 ,
+b11 !
+b11 -
+1%
+b11 '
+b11 *
+b10 )
+#35
+0%
+#40
+b100 $
+b100 +
+b100 "
+b100 ,
+b100 !
+b100 -
+1%
+b100 '
+b100 *
+b11 )
+#45
+0%
+#50
+b101 $
+b101 +
+b101 "
+b101 ,
+b101 !
+b101 -
+1%
+b101 '
+b101 *
+b100 )
+#55
+0%
+#60
+b110 $
+b110 +
+b110 "
+b110 ,
+b110 !
+b110 -
+1%
+b110 '
+b110 *
+b101 )
+#65
+0%
+#70
+b111 $
+b111 +
+b111 "
+b111 ,
+b111 !
+b111 -
+1%
+b111 '
+b111 *
+b110 )
+#75
+0%
+#80
+b1000 $
+b1000 +
+b1000 "
+b1000 ,
+b1000 !
+b1000 -
+1%
+b1000 '
+b1000 *
+b111 )
+#85
+0%
+#90
+b1001 $
+b1001 +
+b1001 "
+b1001 ,
+b1001 !
+b1001 -
+1%
+b1001 '
+b1001 *
+b1000 )
+#95
+0%
+#100
+1%
+b1001 )
+#105
+0%
+#110
+0#
+1%
+0&
+#115
+0%
+#120
