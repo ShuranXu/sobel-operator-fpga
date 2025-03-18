@@ -1,0 +1,151 @@
+$date
+	Mon Mar 17 22:00:52 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module sobel_calc_tb $end
+$var wire 8 ! grayscale_o [7:0] $end
+$var wire 1 " done_o $end
+$var reg 1 # clk $end
+$var reg 8 $ d0_i [7:0] $end
+$var reg 8 % d1_i [7:0] $end
+$var reg 8 & d2_i [7:0] $end
+$var reg 8 ' d3_i [7:0] $end
+$var reg 8 ( d4_i [7:0] $end
+$var reg 8 ) d5_i [7:0] $end
+$var reg 8 * d6_i [7:0] $end
+$var reg 8 + d7_i [7:0] $end
+$var reg 8 , d8_i [7:0] $end
+$var reg 1 - done_i $end
+$var reg 1 . rst $end
+$scope module SOBEL_CALC $end
+$var wire 1 # clk $end
+$var wire 8 / d0_i [7:0] $end
+$var wire 8 0 d1_i [7:0] $end
+$var wire 8 1 d2_i [7:0] $end
+$var wire 8 2 d3_i [7:0] $end
+$var wire 8 3 d4_i [7:0] $end
+$var wire 8 4 d5_i [7:0] $end
+$var wire 8 5 d6_i [7:0] $end
+$var wire 8 6 d7_i [7:0] $end
+$var wire 8 7 d8_i [7:0] $end
+$var wire 1 - done_i $end
+$var wire 1 . rst $end
+$var wire 1 " done_o $end
+$var reg 4 8 done_shift [3:0] $end
+$var reg 10 9 g_sum [9:0] $end
+$var reg 8 : grayscale_o [7:0] $end
+$var reg 10 ; gx_d [9:0] $end
+$var reg 10 < gx_n [9:0] $end
+$var reg 10 = gx_p [9:0] $end
+$var reg 10 > gy_d [9:0] $end
+$var reg 10 ? gy_n [9:0] $end
+$var reg 10 @ gy_p [9:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 @
+b0 ?
+b0 >
+b0 =
+b0 <
+b0 ;
+b0 :
+b0 9
+b0 8
+bx 7
+bx 6
+bx 5
+bx 4
+bx 3
+bx 2
+bx 1
+bx 0
+bx /
+1.
+0-
+bx ,
+bx +
+bx *
+bx )
+bx (
+bx '
+bx &
+bx %
+bx $
+1#
+0"
+b0 !
+$end
+#5
+0#
+#10
+b1 8
+b100000 ?
+b1000 @
+b11000 <
+b10000 =
+1#
+1-
+b1001 ,
+b1001 7
+b1000 +
+b1000 6
+b111 *
+b111 5
+b110 )
+b110 4
+b101 (
+b101 3
+b100 '
+b100 2
+b11 &
+b11 1
+b10 %
+b10 0
+b1 $
+b1 /
+0.
+#15
+0#
+#20
+b11000 >
+b1000 ;
+b11 8
+1#
+#25
+0#
+#30
+b111 8
+b100000 9
+1#
+#35
+0#
+#40
+1"
+b100000 !
+b100000 :
+b1111 8
+1#
+#45
+0#
+#50
+1#
+#55
+0#
+#60
+b1110 8
+1#
+0-
+#65
+0#
+#70
