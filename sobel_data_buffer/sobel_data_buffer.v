@@ -65,8 +65,4 @@ sobel_data_modulate SOBEL_DATA_MODULATE(
     .done_o(done_o)
 );
 
-
-
-
-
 endmodule

@@ -39,6 +39,8 @@ reg [9:0] g_sum; // g_sum = |gx_d| + |gy_d|;
 
 reg [3:0] done_shift;
 
+localparam THRESHOLD = 60;
+
 // calculate gx_p and gx_n
 always @(posedge clk) begin
     if(rst) begin
@@ -86,7 +88,7 @@ always @(posedge clk) begin
     if(rst) begin
         grayscale_o <= 0;
     end else begin
-        grayscale_o <=(g_sum >= 8'd60) ? 8'd255 : g_sum[7:0];
+        grayscale_o <=(g_sum >= THRESHOLD) ? 8'd255 : g_sum[7:0];
     end
 end
 

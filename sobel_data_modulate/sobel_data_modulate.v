@@ -22,8 +22,10 @@ module sobel_data_modulate (
     output done_o
 );
 
-localparam ROWS = 5;//480;
-localparam COLS = 6;//640;
+// localparam ROWS = 5; // for unit testing
+// localparam COLS = 6; // for unit testing
+localparam ROWS = 128;
+localparam COLS = 128;
 
 reg [9:0] iRows, iCols;
 
