@@ -108,24 +108,6 @@ task writeBMP();
             $finish;
         end
 
-        for(i = 0; i < bmp_size; i = i + 1) begin
-            $fwrite(fileId, "%c", bmp_data[i]);
-        end
-
-        $fclose(fileId);
-        $display("writeBMP completed\n");
-    end
-endtask
-
-task writeBMPFromGrayscale();
-    integer fileId, i;
-    begin
-        fileId = $fopen(`write_file_name, "wb");
-        if(fileId == 0) begin
-            $display("Open BMP error\n");
-            $finish;
-        end
-
         // write the BMP file header
         for(i = 0; i < bmp_start_pos; i = i + 1) begin
             $fwrite(fileId, "%c", bmp_data[i]);
@@ -141,7 +123,7 @@ task writeBMPFromGrayscale();
         end
 
         $fclose(fileId);
-        $display("writeBMPFromGrayscale completed\n");
+        $display("writeBMP completed\n");
     end
 endtask
 
@@ -176,41 +158,11 @@ initial begin
     done_i = 1'b0;
 
     #(`clk_period);
-    writeBMPFromGrayscale;
+    writeBMP;
 
     #(`clk_period);
     $finish;
 end
 
-// initial begin
-//     rst = 1'b1;
-//     done_i = 1'b0;
-
-//     red_i = 8'b0;
-//     green_i = 8'b0;
-//     blue_i = 8'b0;
-
-//     #(`clk_period);
-//     rst = 1'b0;
-
-//     red_i = 8'b0000_0100;
-//     green_i = 8'b0000_0010;
-//     blue_i = 8'b0001_0000;
-
-//     done_i = 1'b1;
-
-//     #(`clk_period);
-//     assert(done_o == 1'b1);
-//     assert(grayscale_o == 8'd3);
-//     $display("grayscale_o = %d\n", grayscale_o);
-//     done_i = 1'b0;
-
-//     #(`clk_period);
-//     assert(done_o == 1'b0);
-//     assert(grayscale_o == 8'd0);
-//     readBMP;
-//     writeBMP;
-//     $finish;
-// end
 endmodule
 

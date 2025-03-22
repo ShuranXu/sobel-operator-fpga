@@ -171,9 +171,10 @@ always @(*) begin
     end
 end
 
-//-------------------------handle with iCounter---------------------
-// the iCounter is used to track the extra 2 pixels needed in the 
-// 3rd row in order to be ready for the calculation
+//-------------------------handle with iCounter------------------
+// the iCounter is used to track the number of columns received
+// so far. We can only modulate data when all 9 pixels (i.e. 3 columns)
+// are available.
 always @(posedge clk) begin
     if(rst) begin
         iCounter <= 8'b0;
